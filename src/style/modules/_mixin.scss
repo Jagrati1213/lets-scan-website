@@ -1,0 +1,35 @@
+@import "./variable";
+
+// mixins
+@mixin xs-mobile {
+  @media screen and (max-width: #{$xs}) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media screen and (max-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin min-tablet {
+  @media screen and (max-width: #{$md}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: #{$lg}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (max-width: #{$xl}) {
+    @content;
+  }
+}
+@mixin large-desktop {
+  @media screen and (max-width: #{$xxl}) {
+    @content;
+  }
+}

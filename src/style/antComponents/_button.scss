@@ -1,0 +1,21 @@
+@import "../modules/variable";
+@import "../modules/mixin";
+
+.ant-btn-primary {
+  background: $purple;
+  text-decoration: underline;
+  font-weight: 500;
+  &:hover {
+    background: $dark-purple !important;
+  }
+  @include tablet {
+    font-size: 0.7rem;
+  }
+}
+.ant-btn-link {
+  color: $purple;
+  font-weight: 500;
+  &:hover {
+    color: $dark-purple !important;
+  }
+}
