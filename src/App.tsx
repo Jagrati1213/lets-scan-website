@@ -1,22 +1,26 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { Layout } from "antd";
+import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Outlet } from "react-router-dom";
+import Style from "./style/_app.module.scss";
+import Title from "antd/es/typography/Title";
+import "./style/global.scss";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>ORDER MINDER MENU</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={Style.app}>
+      <Layout className={Style.app_layout}>
+        <Header className={Style.app_header}>
+          <Title level={4}>
+            Menu <span style={{ color: "#94618e" }}>Muse</span>
+          </Title>
+
+          <Title level={5}>Restaurant</Title>
+        </Header>
+        <Content className="content">
+          <Outlet />
+        </Content>
+        <Footer className="footer">Footer</Footer>
+      </Layout>
     </div>
   );
 }
