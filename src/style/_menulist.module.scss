@@ -1,0 +1,27 @@
+@import "./modules/mixin";
+@import "./modules/variable";
+
+.menulist {
+  padding: 1rem;
+  height: calc(900px - 70px);
+
+  .row {
+    margin-top: 2rem;
+    :global(.ant-col) {
+      overflow-x: hidden;
+      margin: 1rem;
+    }
+    .card {
+      height: auto;
+      width: 200px;
+      overflow-x: hidden;
+      border-radius: 0;
+      img {
+        height: 150px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 0;
+      }
+    }
+  }
+}
