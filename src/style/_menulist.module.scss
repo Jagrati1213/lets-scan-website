@@ -4,24 +4,21 @@
 .menulist {
   padding: 1rem;
   height: calc(900px - 70px);
+  h5 {
+    text-align: end;
+  }
+  :global(.ant-row) {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 
-  .row {
-    margin-top: 2rem;
-    :global(.ant-col) {
-      overflow-x: hidden;
-      margin: 1rem;
+    :global(.ant-card .ant-card-body) {
+      padding: 1rem;
     }
-    .card {
-      height: auto;
-      width: 200px;
-      overflow-x: hidden;
-      border-radius: 0;
-      img {
-        height: 150px;
-        object-fit: cover;
-        object-position: top;
-        border-radius: 0;
-      }
+    :global(.ant-card-meta-title) {
+      margin-bottom: 0 !important;
+    }
+    :global(.ant-card-meta-description .ant-space-vertical) {
+      width: 100%;
     }
   }
 }
