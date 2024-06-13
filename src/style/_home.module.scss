@@ -2,7 +2,6 @@
 @import "./modules/mixin";
 
 .home {
-  background-color: red;
   background-image: url("../image/foodbg.jpg");
   height: calc(900px - 70px);
   display: flex;
@@ -25,22 +24,26 @@
       color: white;
       text-align: center;
       @include mobile {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
       }
     }
     p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-align: center;
       color: white;
-
+      margin: 1rem 0;
       @include mobile {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
     }
   }
   .select {
     width: 300px;
-
+    :global(.ant-select-selector) {
+      color: $dark-purple;
+      font-size: 16px;
+      border-color: $dark-purple !important;
+    }
     @include xs-mobile {
       width: 160px;
     }
