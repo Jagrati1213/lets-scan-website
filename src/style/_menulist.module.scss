@@ -4,21 +4,52 @@
 .menulist {
   padding: 1rem;
   height: calc(900px - 70px);
+  @include mobile {
+    margin-bottom: 10rem;
+  }
   h5 {
     text-align: end;
   }
   :global(.ant-row) {
     margin-top: 1rem;
-    margin-bottom: 2rem;
-
-    :global(.ant-card .ant-card-body) {
-      padding: 1rem;
+    @include mobile {
+      justify-content: center;
     }
+    :global(.ant-col) {
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    :global(.ant-col-xs-12) {
+      @include xs-mobile {
+        max-width: 100%;
+      }
+    }
+
+    :global(.ant-card) {
+      overflow-x: hidden;
+      :global(.ant-card-body) {
+        padding: 1rem;
+        @include mobile {
+          padding: 9px;
+        }
+      }
+      :global(.ant-card-cover img) {
+        height: 100%;
+        width: 100%;
+        object-fit: fill;
+        object-position: top;
+        border-start-start-radius: 12px;
+        border-start-end-radius: 12px;
+      }
+    }
+
     :global(.ant-card-meta-title) {
       margin-bottom: 0 !important;
     }
     :global(.ant-card-meta-description .ant-space-vertical) {
       width: 100%;
+      row-gap: 0px;
     }
   }
 }
