@@ -12,7 +12,7 @@ export default function MenuList() {
           .fill(null)
           .map((item, index) => {
             return (
-              <Col xs={24} sm={12} md={8} key={index}>
+              <Col xs={12} sm={8} md={6} key={index}>
                 <Card
                   className="card"
                   bordered={false}
@@ -38,8 +38,8 @@ const CardDesc = () => {
   return (
     <Space direction="vertical" className="card_desc">
       <p>Descriptions</p>
-      <Flex align="center" justify="space-between">
-        <p>Price | Rate</p>
+      <p>Price | Rate</p>
+      <Flex justify="end">
         <Button type="link">Add</Button>
       </Flex>
     </Space>
