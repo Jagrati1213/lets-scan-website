@@ -18,10 +18,9 @@ function App() {
 
           <Title level={5}>Restaurant</Title>
         </Header>
-        <Content className="content">
+        <Content className={Style.content}>
           <Outlet />
         </Content>
-        <Footer className="footer">Footer</Footer>
       </Layout>
     </div>
   );
