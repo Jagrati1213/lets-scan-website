@@ -1,38 +1,47 @@
-import { Avatar, Card, Col, Row, Space } from "antd";
+import { Button, Card, Col, Flex, Image, Row, Space } from "antd";
 import Style from "../../style/_menulist.module.scss";
 import Title from "antd/es/typography/Title";
+import Meta from "antd/es/card/Meta";
 
 export default function MenuList() {
   return (
     <div className={Style.menulist}>
       <Title level={5}>Menu Items</Title>
-      <Row gutter={16} className={Style.row} justify={"center"}>
-        <Col md={12} sm={24}>
-          <Card
-            className={Style.card}
-            bordered={false}
-            cover={
-              <img
-                alt="example"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Card.Meta
-              title="Card title"
-              description={
-                <Space direction="vertical">
-                  <p>Desc</p>
-                  <Space>
-                    <p>Price</p>
-                    <p>Rate</p>
-                  </Space>
-                </Space>
-              }
-            />
-          </Card>
-        </Col>
+      <Row gutter={[16, 16]} wrap={true}>
+        {Array(6)
+          .fill(null)
+          .map((item, index) => {
+            return (
+              <Col xs={24} sm={12} md={8} key={index}>
+                <Card
+                  className="card"
+                  bordered={false}
+                  cover={
+                    <Image
+                      height={150}
+                      preview={false}
+                      src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                    />
+                  }
+                >
+                  <Meta title="Europe Street beat" description={<CardDesc />} />
+                </Card>
+              </Col>
+            );
+          })}
       </Row>
     </div>
   );
 }
+
+const CardDesc = () => {
+  return (
+    <Space direction="vertical" className="card_desc">
+      <p>Descriptions</p>
+      <Flex align="center" justify="space-between">
+        <p>Price | Rate</p>
+        <Button type="link">Add</Button>
+      </Flex>
+    </Space>
+  );
+};
