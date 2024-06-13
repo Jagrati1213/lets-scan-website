@@ -7,7 +7,7 @@ export default function MenuList() {
   return (
     <div className={Style.menulist}>
       <Title level={5}>Menu Items</Title>
-      <Row gutter={[16, 16]} wrap={true}>
+      <Row gutter={[16, 16]} wrap={true} justify={"center"}>
         {Array(6)
           .fill(null)
           .map((item, index) => {
