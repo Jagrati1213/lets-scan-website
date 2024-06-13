@@ -1,4 +1,3 @@
-import React from "react";
 import Style from "../../style/_home.module.scss";
 import { Select, Space } from "antd";
 import Title from "antd/es/typography/Title";
@@ -12,12 +11,12 @@ export default function Home() {
     <div className={Style.home}>
       <div className={Style.drop_down_box}>
         <Space direction="vertical" align="center">
-          <Title level={3} className={Style.title}>
+          <Title level={4} className={Style.title}>
             Welcome to Menu Muse
           </Title>
           <p>
             Explore our delicious menu and conveniently order your favorite
-            dishes by scan QR!
+            dishes by scan QR and Choose your restaurant!
           </p>
           <Select
             className={Style.select}
