@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Content, Header } from "antd/es/layout/layout";
 import { Link, Outlet } from "react-router-dom";
 import Style from "./style/_app.module.scss";
 import Title from "antd/es/typography/Title";

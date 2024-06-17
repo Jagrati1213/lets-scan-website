@@ -2,10 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./component/home/Home";
-import Error from "./component/error/Error";
-import MenuList from "./component/menu/MenuList";
-import "./index.css";
+import Home from "./component/Home";
+import Error from "./component/Error";
+import MenuList from "./component/Menu/MenuList";
+import "./index.scss";
+import Menu from "./component/Menu";
+import { Provider } from "react-redux";
+import store from "./store";
+import Checkout from "./component/Checkout";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -21,8 +25,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/menu",
+        element: <Menu />,
+      },
+      {
         path: "/menu/:userId",
         element: <MenuList />,
+      },
+      {
+        path: "/menu/:userId/checkout",
+        element: <Checkout />,
       },
     ],
   },
@@ -30,6 +42,8 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

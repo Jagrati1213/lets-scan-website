@@ -1,0 +1,55 @@
+.container {
+  height: 100%;
+  border: 0.1rem solid rgba(109, 109, 109, 0.346);
+  padding: 2rem;
+  position: relative;
+  :global(.ant-list-item) {
+    padding: 1rem;
+  }
+  .list {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .price {
+    float: inline-end;
+  }
+  .listFooter {
+    background-color: white;
+
+    max-height: 70vh;
+    :global(.ant-list-footer) {
+      padding: 1rem;
+      box-shadow: 0 -3px 10px rgba(100, 100, 100, 0.177);
+    }
+    :global(.ant-typography) {
+      font-size: 1.6rem;
+    }
+    :global(.ant-list-items) {
+      max-height: calc(60vh - 7rem);
+      overflow-y: auto;
+    }
+  }
+  .payBtn {
+    background: Green;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 0;
+    border-radius: 0;
+    padding: 3rem;
+    color: White;
+    font-weight: 500;
+    font-size: 1.8rem;
+  }
+  .addMoreBtn {
+    width: 100%;
+
+    margin-top: 1.2rem;
+    border-top: 1px solid #4746462a;
+    border-radius: 0;
+    :global(.ant-row) {
+      width: 100%;
+    }
+  }
+}
