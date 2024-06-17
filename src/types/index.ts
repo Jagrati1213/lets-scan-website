@@ -15,7 +15,7 @@ export interface Vendors {
 }
 
 export interface CartItemsI {
-  id: string;
+  menuId: string;
   quantity: number;
   price: number;
 }

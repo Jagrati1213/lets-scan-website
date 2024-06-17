@@ -40,7 +40,7 @@ const MenuList: React.FC = () => {
     });
     order.forEach((item) => {
       const index = extendMenu.findIndex(
-        (menuItem) => menuItem._id === item.id
+        (menuItem) => menuItem._id === item.menuId
       );
       if (index !== -1) {
         extendMenu[index].quantity = item.quantity;
@@ -61,7 +61,7 @@ const MenuList: React.FC = () => {
     });
     order.forEach((item) => {
       const index = extendMenu.findIndex(
-        (menuItem) => menuItem._id === item.id
+        (menuItem) => menuItem._id === item.menuId
       );
       if (index !== -1) {
         extendMenu[index].quantity = item.quantity;

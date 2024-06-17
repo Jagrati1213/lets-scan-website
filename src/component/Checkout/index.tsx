@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.scss";
 import { Alert, Button, Col, List, Row, Typography } from "antd";
 import {
@@ -19,6 +19,7 @@ const Checkout = () => {
   const params = useParams();
   const { menu } = useAppSelector((state) => state.menu);
   const { order } = useAppSelector((state) => state.cart);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updatedMenu = useMemo(() => {
     const extendMenu = menu.map((items) => {
@@ -26,7 +27,7 @@ const Checkout = () => {
     });
     order.forEach((item) => {
       const index = extendMenu.findIndex(
-        (menuItem) => menuItem._id === item.id
+        (menuItem) => menuItem._id === item.menuId
       );
       if (index !== -1) {
         extendMenu[index].quantity = item.quantity;
@@ -61,12 +62,19 @@ const Checkout = () => {
 
   // PAYMENT
   const handlePaymentProceed = async () => {
-    if (params.userId)
-      await paymentIntegrationHandler({
-        userId: params.userId,
-        orderList: order,
-        totalAmount,
-      });
+    setIsLoading(true);
+    try {
+      if (params.userId)
+        await paymentIntegrationHandler({
+          userId: params.userId,
+          orderList: order,
+          totalAmount,
+        });
+    } catch (error) {
+      console.log("ERROR IN PAYMENT INTEGRATION");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // RETURN THE UPDATED MENU
@@ -154,6 +162,7 @@ const Checkout = () => {
         type="default"
         icon={<LogoutOutlined />}
         onClick={handlePaymentProceed}
+        loading={isLoading}
       >
         Proceed to Pay
       </Button>
