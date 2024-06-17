@@ -19,3 +19,9 @@ export interface CartItemsI {
   quantity: number;
   price: number;
 }
+
+export interface paymentIntegrationT {
+  userId: string;
+  orderList: CartItemsI[];
+  totalAmount: number;
+}
