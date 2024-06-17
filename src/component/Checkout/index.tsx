@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { decrement, increment } from "../../store/slice/cart";
 import { useNavigate, useParams } from "react-router-dom";
 import { paymentIntegrationHandler } from "../../api/checkout/paymentIntegration";
+import { MenuItemT } from "../../types";
 
 const { Title, Text } = Typography;
 const Checkout = () => {
@@ -36,10 +37,16 @@ const Checkout = () => {
     return newArray;
   }, [order, menu]);
 
+  const totalAmount = useMemo(() => {
+    return updatedMenu.reduce(
+      (acc: number, element: any) => acc + element.price! * element.quantity,
+      0
+    );
+  }, [updatedMenu]);
+
   // ADD MENU ITEMS
   const handleAdd = (value: string) => {
     dispatch(increment(value));
-    console.log(order);
   };
 
   // REMOVE MENU ITEMS
@@ -54,7 +61,12 @@ const Checkout = () => {
 
   // PAYMENT
   const handlePaymentProceed = async () => {
-    if (params.userId) await paymentIntegrationHandler(params.userId);
+    if (params.userId)
+      await paymentIntegrationHandler({
+        userId: params.userId,
+        orderList: order,
+        totalAmount,
+      });
   };
 
   // RETURN THE UPDATED MENU
@@ -80,7 +92,8 @@ const Checkout = () => {
               <Text strong>
                 ₹
                 {updatedMenu.reduce(
-                  (acc, element) => acc + element.price! * element.quantity,
+                  (acc: number, element: any) =>
+                    acc + element.price! * element.quantity,
                   0
                 )}
               </Text>
