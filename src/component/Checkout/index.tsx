@@ -9,6 +9,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../store";
 import { decrement, increment } from "../../store/slice/cart";
 import { useNavigate, useParams } from "react-router-dom";
+import { paymentIntegrationHandler } from "../../api/checkout/paymentIntegration";
 
 const { Title, Text } = Typography;
 const Checkout = () => {
@@ -35,17 +36,28 @@ const Checkout = () => {
     return newArray;
   }, [order, menu]);
 
+  // ADD MENU ITEMS
   const handleAdd = (value: string) => {
     dispatch(increment(value));
     console.log(order);
   };
+
+  // REMOVE MENU ITEMS
   const handleRemove = (id: string) => {
     dispatch(decrement(id));
   };
+
+  // VIEW MENU ITEMS
   const handleViewMenu = useCallback(() => {
     navigate(`/menu/${params.userId}`);
   }, [navigate, params.userId]);
 
+  // PAYMENT
+  const handlePaymentProceed = async () => {
+    if (params.userId) await paymentIntegrationHandler(params.userId);
+  };
+
+  // RETURN THE UPDATED MENU
   useEffect(() => {
     if (updatedMenu.length === 0) {
       handleViewMenu();
@@ -128,6 +140,7 @@ const Checkout = () => {
         className={styles.payBtn}
         type="default"
         icon={<LogoutOutlined />}
+        onClick={handlePaymentProceed}
       >
         Proceed to Pay
       </Button>
