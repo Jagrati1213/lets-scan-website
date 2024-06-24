@@ -6,6 +6,7 @@ import getVendors from "../../api/vendors/getVendors";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
 import { getMenuAction } from "../../store/slice/menu";
+import { clearCart } from "../../store/slice/cart";
 
 export default function Home() {
   const [vendors, setVendors] = useState<
@@ -20,6 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const handleChange = (value: string) => {
+    dispatch(clearCart());
     setLoading(true);
     dispatch(getMenuAction(value)).then(() => {
       navigate(`menu/${value}`);
@@ -54,7 +56,7 @@ export default function Home() {
         <div className={Style.drop_down_box}>
           <Space direction="vertical" align="center">
             <Title level={4} className={Style.title}>
-              Welcome to Menu Muse
+              Welcome to Lets scan
             </Title>
             <p>
               Explore our delicious menu and conveniently order your favorite

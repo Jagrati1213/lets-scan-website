@@ -3,7 +3,7 @@ import { paymentIntegrationT } from "../../types";
 import { paymentSuccessHandler } from "./paymentSucess";
 
 export const paymentIntegrationHandler = async ({
-  userId,
+  vendorId,
   orderList,
   totalAmount,
 }: paymentIntegrationT) => {
@@ -37,7 +37,7 @@ export const paymentIntegrationHandler = async ({
     image: "https://example.com/your_logo",
     order_id: order.id,
     handler: async function (response: any) {
-      await paymentSuccessHandler(response, userId, orderList);
+      await paymentSuccessHandler(response, vendorId, orderList);
     },
     prefill: {
       name: "Jagrati Gupta",

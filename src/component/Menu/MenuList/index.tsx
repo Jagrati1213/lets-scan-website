@@ -14,12 +14,11 @@ import {
   Row,
   Space,
   Typography,
-  message,
 } from "antd";
 import styles from "./styles.module.scss";
 import { FcRating } from "react-icons/fc";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getMenuAction } from "../../../store/slice/menu";
 import { decrement, increment } from "../../../store/slice/cart";
 
@@ -28,7 +27,7 @@ const MenuList: React.FC = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
-
+  const { search } = useLocation();
   const { menu, isOpen } = useAppSelector((state) => state.menu);
   const { order } = useAppSelector((state) => state.cart);
 
@@ -74,19 +73,36 @@ const MenuList: React.FC = () => {
     return newArray;
   }, [order, menu]);
 
-  const handleAdd = (value: string) => {
-    dispatch(increment(value));
-    console.log(order);
+  const handleAdd = ({
+    menuId,
+    price,
+    quantity,
+  }: {
+    menuId: string;
+    price: number;
+    quantity: number;
+  }) => {
+    dispatch(
+      increment({
+        menuId,
+        price,
+        quantity,
+      })
+    );
   };
   const handleRemove = (id: string) => {
     dispatch(decrement(id));
   };
 
+  const handleViewCart = () => {
+    navigate(`checkout${search}`);
+  };
+
   useEffect(() => {
     setLoading(false);
-    if (params.userId && menu.length === 0) {
+    if (params.vendorId && menu.length === 0) {
       setLoading(true);
-      dispatch(getMenuAction(params.userId))
+      dispatch(getMenuAction(params.vendorId))
         .catch(() => {
           navigate("/menu");
         })
@@ -94,11 +110,11 @@ const MenuList: React.FC = () => {
           setLoading(false);
         });
     }
-  }, [dispatch, menu.length, navigate, params.userId]);
+  }, [dispatch, menu.length, navigate, params.vendorId]);
 
   return (
     <div className={styles.container}>
-      {!isOpen && (
+      {!isOpen && !loading && (
         <Alert
           type="error"
           message="This Restaurant is not open right now!!!!"
@@ -189,9 +205,11 @@ const MenuList: React.FC = () => {
                       }
                       type={item.quantity !== 0 ? "link" : "default"}
                       disabled={!isOpen}
-                      onClick={() => {
-                        handleAdd(item._id!);
-                      }}
+                      onClick={handleAdd.bind(null, {
+                        menuId: item._id,
+                        price: item.price,
+                        quantity: item.quantity,
+                      })}
                     >
                       {item?.quantity === 0 && "Add"}
                     </Button>
@@ -211,9 +229,7 @@ const MenuList: React.FC = () => {
           <Button
             className={styles.checkoutBtn}
             type="text"
-            onClick={() => {
-              navigate("checkout");
-            }}
+            onClick={handleViewCart}
             disabled={!isOpen}
           >
             <Text>

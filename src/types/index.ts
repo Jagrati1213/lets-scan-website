@@ -1,10 +1,10 @@
 export interface MenuItemT {
-  _id: string | null;
-  image: string | undefined;
-  name: string | null;
-  price: number | null;
-  description: string | null;
-  rating?: string | null;
+  _id: string;
+  image: string;
+  name: string;
+  price: number;
+  description: string;
+  rating?: number;
   isVeg: boolean;
 }
 
@@ -21,7 +21,11 @@ export interface CartItemsI {
 }
 
 export interface paymentIntegrationT {
-  userId: string;
+  vendorId: string;
   orderList: CartItemsI[];
   totalAmount: number;
+  name: string;
+  email: string;
+  tableNumber?: number;
+  note?: string;
 }

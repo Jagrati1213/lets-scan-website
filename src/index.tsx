@@ -10,6 +10,7 @@ import Menu from "./component/Menu";
 import { Provider } from "react-redux";
 import store from "./store";
 import Checkout from "./component/Checkout";
+import OrderStatus from "./component/OrderStatus";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -29,12 +30,16 @@ const router = createBrowserRouter([
         element: <Menu />,
       },
       {
-        path: "/menu/:userId",
+        path: "/menu/:vendorId",
         element: <MenuList />,
       },
       {
-        path: "/menu/:userId/checkout",
+        path: "/menu/:vendorId/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/order-status/:orderId",
+        element: <OrderStatus />,
       },
     ],
   },

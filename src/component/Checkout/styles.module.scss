@@ -26,7 +26,8 @@
     }
     :global(.ant-list-items) {
       max-height: calc(60vh - 7rem);
-      overflow-y: auto;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
     }
   }
   .payBtn {
@@ -41,6 +42,9 @@
     color: White;
     font-weight: 500;
     font-size: 1.8rem;
+    @media screen and (max-width: 768px) {
+      position: fixed;
+    }
   }
   .addMoreBtn {
     width: 100%;
@@ -51,5 +55,16 @@
     :global(.ant-row) {
       width: 100%;
     }
+  }
+}
+.modal {
+  .text {
+    color: white;
+  }
+}
+.form {
+  margin: 2rem 0;
+  :global(.ant-form-item) {
+    margin-bottom: 1rem !important;
   }
 }

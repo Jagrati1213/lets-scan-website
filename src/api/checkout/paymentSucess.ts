@@ -3,7 +3,7 @@ import { CartItemsI } from "../../types";
 
 export const paymentSuccessHandler = async (
   response: any,
-  userId: string,
+  vendorId: string,
   orderList: CartItemsI[]
 ) => {
   try {
@@ -26,9 +26,11 @@ export const paymentSuccessHandler = async (
         "api/v1/order",
         {
           paymentId: data.paymentId,
-          userId: userId,
-          name: "Ashish Kumar",
-          email: "ashishkumar@gmail.com",
+          vendorId: vendorId,
+          name: "Jagrati Gupta",
+          email: "jagratiguptar@gmail.com",
+          tableNumber: 2,
+          note: "Extra Chatni",
           orderList: orderList,
         },
         {
@@ -38,7 +40,6 @@ export const paymentSuccessHandler = async (
         }
       );
       const orderData = orderResponse.data;
-      console.log(orderData);
     }
   } catch (error) {
     console.log("ERROR IN RAZOR SUCCESS!");

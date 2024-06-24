@@ -12,7 +12,7 @@ export interface GetVendorsResponse {
 
 const getVendors = async (): Promise<GetVendorsResponse["data"]> => {
   const response = await api.get<GetVendorsResponse>(
-    "/api/v1/lets-scan/all-venders"
+    "/api/v1/lets-scan/all-vendors"
   );
 
   return response.data.data;

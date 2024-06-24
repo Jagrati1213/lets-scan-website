@@ -1,0 +1,49 @@
+.container {
+  height: 100%;
+  border: 0.1rem solid rgba(109, 109, 109, 0.346);
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+  margin-bottom: 3rem;
+  :global(.ant-spin-nested-loading) {
+    height: 100%;
+  }
+  :global(.ant-spin-container) {
+    height: 100%;
+  }
+  .divider {
+    margin: 1rem 0 !important;
+    color: black;
+  }
+  .list {
+    margin-bottom: 3rem;
+    :global(.ant-list-footer) {
+      padding: 0.8rem 0;
+    }
+    :global(.ant-row) {
+      width: 100%;
+    }
+    :global(.ant-list-item) {
+      padding: 0.5rem 0;
+    }
+    .divider {
+      margin: 0.2rem 0 !important;
+    }
+    :global(.ant-divider-dashed) {
+      border-color: black;
+    }
+  }
+  .stickyBtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    @media screen and (max-width: 768px) {
+      position: fixed;
+    }
+  }
+}
+.code {
+  margin-bottom: 5rem;
+}

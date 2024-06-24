@@ -13,9 +13,9 @@ const initialState: MenuSlice = {
 
 export const getMenuAction = createAsyncThunk<GetMenuResponse["data"], string>(
   "menu/getMenuAction",
-  async (userId: string) => {
+  async (vendorId: string) => {
     try {
-      const response = await getMenu(userId);
+      const response = await getMenu(vendorId);
       return response;
     } catch (error) {
       console.log(error);
