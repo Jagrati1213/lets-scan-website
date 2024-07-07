@@ -21,7 +21,7 @@ export interface GetOrderResponse {
         createdAt: string;
         updatedAt: string;
       }[];
-      orderToken: string;
+      orderToken: number;
       verifyCode: number;
       paymentId: string;
       orderStatus: "Pending" | "Complete";
