@@ -12,11 +12,9 @@ function App() {
         <Header className={Style.app_header}>
           <Link to={"/"}>
             <Title level={4}>
-              Menu <span style={{ color: "#94618e" }}>Muse</span>
+              Let's <span style={{ color: "#94618e" }}>Scan</span>
             </Title>
           </Link>
-
-          <Title level={5}>Restaurant</Title>
         </Header>
         <Content className={Style.content}>
           <Outlet />
