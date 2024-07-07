@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-
 import styles from "./styles.module.scss";
 import {
   Alert,
@@ -24,13 +23,12 @@ import getOrder, { GetOrderResponse } from "../../api/order/getOrder";
 const { Text } = Typography;
 const OrderStatus = () => {
   const navigate = useNavigate();
-
   const params = useParams();
-
   const [loading, setLoading] = useState(false);
   const [orderDetails, setOrderDetails] = useState<
     GetOrderResponse["data"] | null
   >();
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   const handleReorder = () => {
     navigate(`/menu/${params?.vendorId}`);
@@ -58,38 +56,43 @@ const OrderStatus = () => {
     getOrderStatus();
   }, [getOrderStatus]);
 
+  // RESIZE LAYOUT
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className={styles.container}>
       <Spin spinning={loading}>
         {!orderDetails ? (
           <Skeleton active={loading} />
         ) : (
-          <div>
+          <div className={styles.order_container}>
             <Row justify={"space-between"} align={"middle"}>
               <Col>
-                <Text strong>ORDER#{orderDetails?.orderDetails._id}</Text>
+                ORDER ID <Text strong> #{orderDetails?.orderDetails._id}</Text>
               </Col>
 
               <Col>
-                Token:- {orderDetails?.orderDetails.orderToken.toUpperCase()}
+                Token:-{" "}
+                <Text strong>{orderDetails?.orderDetails.orderToken}</Text>
               </Col>
             </Row>
             <br />
             <br />
-
             <Steps
               current={1}
-              direction="horizontal"
+              direction={windowWidth > 991 ? "horizontal" : "vertical"}
               items={[
                 {
-                  title: (
-                    <Text strong>
-                      {" "}
-                      {orderDetails?.restaurant[0].toUpperCase()}
-                      {orderDetails?.restaurant.slice(1)}
-                    </Text>
-                  ),
-
+                  title: `${orderDetails?.restaurant[0].toUpperCase()}${orderDetails?.restaurant.slice(
+                    1
+                  )}`,
                   status:
                     orderDetails?.orderDetails.orderStatus === "Complete"
                       ? "finish"
@@ -109,9 +112,9 @@ const OrderStatus = () => {
             <Divider className={styles.divider} />
             <Row justify={"space-between"} align={"middle"} gutter={10}>
               <Col>
-                <Text strong>
-                  PAYMENT#{orderDetails?.orderDetails.paymentId}{" "}
-                </Text>
+                PAYMENT ID
+                <Text strong> #{orderDetails?.orderDetails.paymentId} </Text>
+                <br />
                 <br />
                 <Text>
                   Ordered by {orderDetails?.orderDetails.customer.name}
@@ -124,6 +127,7 @@ const OrderStatus = () => {
               )}
             </Row>
             <Divider className={styles.divider} />
+            <br />
 
             {orderDetails?.orderDetails.note && (
               <>
@@ -154,7 +158,7 @@ const OrderStatus = () => {
               {orderDetails.orderDetails.orderList.map((item) => {
                 return (
                   <Row justify={"space-between"} key={item._id}>
-                    <Col span={16}>{item.menuId}</Col>
+                    <Col span={16}>{item?.name}</Col>
                     <Col>
                       {item.quantity}× ₹ {item.price}
                     </Col>
@@ -186,6 +190,7 @@ const OrderStatus = () => {
         )}
       </Spin>
       <Button
+        type="primary"
         className={styles.stickyBtn}
         onClick={handleReorder}
         loading={loading}

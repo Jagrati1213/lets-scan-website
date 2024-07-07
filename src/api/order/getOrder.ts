@@ -16,6 +16,7 @@ export interface GetOrderResponse {
         menuId: string;
         quantity: number;
         price: number;
+        name: string;
         _id: string;
         createdAt: string;
         updatedAt: string;

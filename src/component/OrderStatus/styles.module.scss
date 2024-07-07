@@ -1,10 +1,11 @@
 .container {
   height: 100%;
   border: 0.1rem solid rgba(109, 109, 109, 0.346);
-  padding: 1rem;
+  padding: 2rem;
   overflow-y: auto;
   position: relative;
   margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 0.574);
   :global(.ant-spin-nested-loading) {
     height: 100%;
   }
@@ -39,8 +40,14 @@
     left: 0;
     width: 100%;
     border-radius: 0;
+    padding: 2rem 0;
     @media screen and (max-width: 768px) {
       position: fixed;
+    }
+  }
+  .order_container {
+    :global(.ant-qrcode) {
+      margin-bottom: 8rem;
     }
   }
 }

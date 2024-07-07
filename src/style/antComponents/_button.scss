@@ -7,9 +7,6 @@
   &:hover {
     background: $dark-purple !important;
   }
-  @include tablet {
-    font-size: 0.7rem;
-  }
 }
 .ant-btn-link {
   color: $purple;

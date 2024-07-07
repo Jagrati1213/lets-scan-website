@@ -1,0 +1,23 @@
+@import "../modules/variable";
+
+.ant-steps {
+  .ant-steps-item-process .ant-steps-item-icon {
+    background-color: $purple;
+    border-color: $purple;
+  }
+  .ant-steps-item-finish .ant-steps-item-icon {
+    background-color: $dark-purple;
+    border-color: $dark-purple;
+  }
+  .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+    color: white;
+  }
+  &.ant-steps-vertical
+    > .ant-steps-item
+    > .ant-steps-item-container
+    > .ant-steps-item-tail {
+    padding: 36px 0 6px;
+    width: 3px;
+    background-color: $gray;
+  }
+}
