@@ -25,6 +25,7 @@ import { CartItemsI, paymentIntegrationT } from "../../types";
 import checkoutOrder from "../../api/razorpay/checkoutOrder";
 import verifyPayment from "../../api/razorpay/verifyPayment";
 import placeOrder from "../../api/razorpay/placeOrder";
+import image from "../../image/Lets-scan.png";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -113,7 +114,6 @@ const Checkout = () => {
   ) => {
     try {
       // GET RAZOR PAY SUCCESS DATA
-
       const body = { ...response, vendorId };
 
       // CHECK PAYMENT SUCCESS
@@ -134,7 +134,7 @@ const Checkout = () => {
           totalAmount: totalAmount,
         });
         message.success("Payment Successful!!!");
-        navigate(`/order-status/${orderResponse?._id}`);
+        navigate(`/order-status/${vendorId}/${orderResponse?._id}`);
         dispatch(clearCart());
       }
     } catch (error) {
@@ -155,7 +155,6 @@ const Checkout = () => {
   }: paymentIntegrationT) => {
     try {
       // GET RAZOR KEY
-
       const { order } = await checkoutOrder({ totalAmount, vendorId });
 
       if (!order) {
@@ -163,14 +162,13 @@ const Checkout = () => {
         return;
       }
       //   GENERATE RAZOR PAY OPTIONS
-
       const options = {
         key: process.env.RAZOR_API_KEY_ID,
         amount: order.amount,
         currency: "INR",
         name: "Let's Scan",
         description: "Pay & Enjoy Your Food!",
-        image: "https://example.com/your_logo",
+        image: image,
         order_id: order.id,
         handler: async function (response: {
           razorpay_order_id: any;
@@ -255,9 +253,6 @@ const Checkout = () => {
       }
     } catch (error) {
       message.error("Payment failed!!!!!");
-    } finally {
-      setIsLoading(false);
-      form.resetFields();
     }
   };
 
@@ -269,9 +264,7 @@ const Checkout = () => {
     <div className={styles.container}>
       <Spin spinning={isLoading}>
         <Alert banner message={"This bill is GST  inclusive"} />
-
         <br />
-
         <List
           header={<Title level={2}>Cart details</Title>}
           footer={
