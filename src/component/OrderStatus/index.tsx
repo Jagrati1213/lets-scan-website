@@ -194,6 +194,7 @@ const OrderStatus = () => {
         className={styles.stickyBtn}
         onClick={handleReorder}
         loading={loading}
+        disabled={orderDetails?.orderDetails.orderStatus !== "Complete"}
       >
         Reorder
       </Button>
